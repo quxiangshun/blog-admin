@@ -24,8 +24,10 @@ export default {
   },
   data() {
     return {
-      title: 'Vue Admin Template',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: '中创宏顺管理系统',
+      // logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      // 直接写路径不生效，需要通过require导入进来
+      logo: require('@/assets/logo.png')
     }
   }
 }
