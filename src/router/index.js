@@ -51,7 +51,13 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard', affix: true }
+      meta: {
+        title: '首页',
+        icon: 'dashboard',
+        noCache: false, // 如果设置为true，则不会被 <keep-alive> 缓存(默认 false)
+        // breadcrumb: false, //  如果设置为false，则不会在breadcrumb面包屑中显示(默认 true)
+        affix: true, // 如果设置为true，它则会固定在tags-view中(默认 false)
+      }
     }]
   },
   // 博客管理
