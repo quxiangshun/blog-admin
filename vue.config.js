@@ -36,7 +36,18 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+    before: require('./mock/mock-server.js'),
+    proxy: { // 开发环境代理配置
+      [process.env.VUE_APP_BASE_API]: {
+        // 目标服务器地址
+        target: process.env.VUE_APP_SERVICE_URL,
+        changeOrigin: true, // 开启代理服务器，
+        pathRewrite: {
+          // 将 请求地址前缀 /dev-api 替换为 空的，
+          ['^' + process.env.VUE_APP_BASE_API]: ''
+        }
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
