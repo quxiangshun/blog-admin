@@ -72,7 +72,11 @@ export const constantRoutes = [
         path: 'article',
         name: 'Article',
         component: () => import('@/views/article/index'),
-        meta: { title: '文章管理', icon: 'el-icon-notebook-1' }
+        meta: {
+          title: '文章管理',
+          icon: 'el-icon-notebook-1',
+          affix: true // 如果设置为true，它则会固定在tags-view中(默认 false) }
+        }
       },
       {
         path: 'category',
