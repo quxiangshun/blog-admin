@@ -46,7 +46,8 @@ export default {
     },
     routes() {
       // return this.$store.state.permission.routes
-      return this.$route.options.routes
+      // 如果不修改，刷新页面后标签栏不会保留已打开标签页
+      return this.$router.options.routes
     }
   },
   watch: {
