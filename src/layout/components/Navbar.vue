@@ -17,7 +17,7 @@
             </el-dropdown-item>
           </router-link>
           <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>文档</el-dropdown-item>
+            <el-dropdown-item>中创宏顺</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出</span>
@@ -52,8 +52,9 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      // await this.$store.dispatch('user/logout')
+      // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+       window.location.href = `${process.env.VUE_APP_AUTH_CENTER_URL}/logout?redirectURL=${window.location.href}`
     }
   }
 }
