@@ -15,6 +15,8 @@ const name = defaultSettings.title || 'vue Admin Template' // page title
 // port = 9528 npm run dev OR npm run dev --port = 9528
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
+console.log('port', port, process.env.port, process.env.npm_config_port)
+
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
   /**
@@ -30,8 +32,11 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
-    port: port,
-    open: true,
+    port: port, // 端口号，如果端口号被占用，会自动提升1
+    host: "admin.shun.com", //主机名
+    https: false, //协议
+    open: true, //启动服务时自动打开浏览器访问
+
     overlay: {
       warnings: false,
       errors: true
