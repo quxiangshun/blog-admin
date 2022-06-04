@@ -87,14 +87,24 @@ import roleApi from '@/api/role'
         // 查询角色之前所拥有的菜单ids ,然后进行回显
         async getMenuIdsByRoleId() {
             const {data} = await roleApi.getMenuIdsByRoleId(this.roleId)
-            this.menuIds = data
+            // this.menuIds = data
+            data.forEach(id => {
+                // 获取节点对象
+                const node = this.$refs.tree.getNode(id)
+                if(node.isLeaf) {
+                    this.$refs.tree.setChecked(id, true)
+                }
+            })
         },
 
         submitForm(formName) {
             // 获取所有被选中的菜单id
            const checkedMenuIds = this.$refs.tree.getCheckedKeys()
+           // 半选中
+           const parentIds = this.$refs.tree.getHalfCheckedKeys()
+           const menuIds = parentIds.concat(checkedMenuIds);
            // 调用保存角色权限菜单接口
-           roleApi.saveRoleMenu(this.roleId, checkedMenuIds ).then(response => {
+           roleApi.saveRoleMenu(this.roleId, menuIds ).then(response => {
                if(response.code === 20000) {
                    this.$message({message: '分配权限成功', type: 'success'})
                    //关闭窗口

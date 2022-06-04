@@ -3,15 +3,14 @@
 
         <!-- 条件查询 -->
         <el-form :inline="true" :model="query" size="mini">
-            <el-form-item label="角色名称：">
+            <el-form-item v-permission="'role:search'" label="角色名称：">
                 <el-input v-model.trim="query.name" ></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button icon="el-icon-search" type="primary" @click="queryData">查询</el-button>
-                <el-button icon="el-icon-refresh"  @click="reload">重置</el-button>
-                <el-button v-if="!roleIds" icon="el-icon-circle-plus-outline" type="primary" @click="openAdd" >新增</el-button>
-                
-                <el-button v-if="roleIds" icon="el-icon-circle-plus-outline" type="success" @click="handleUserRole" >设置角色</el-button>
+                <el-button v-permission="'role:search'" icon="el-icon-search" type="primary" @click="queryData">查询</el-button>
+                <el-button v-permission="'role:search'" icon="el-icon-refresh"  @click="reload">重置</el-button>
+                <el-button v-permission="'role:add'" v-if="!roleIds" icon="el-icon-circle-plus-outline" type="primary" @click="openAdd" >新增</el-button>
+                <el-button v-permission="'user:role'" v-if="roleIds" icon="el-icon-circle-plus-outline" type="success" @click="handleUserRole" >设置角色</el-button>
             </el-form-item>
         </el-form>
 
@@ -34,9 +33,9 @@
             <!--roleIds如果有值，则是用户管理组件传递过来了，则把操作列隐藏  -->
             <el-table-column  align="center" label="操作" v-if="!roleIds">
                 <template slot-scope="scope">
-                    <el-button type="primary" @click="handlePermission(scope.row.id)" size="mini">分配权限</el-button>
-                    <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
-                    <el-button type="danger"  @click="handleDelete(scope.row.id)"  size="mini">删除</el-button>
+                    <el-button v-permission="'role:permission'" type="primary" @click="handlePermission(scope.row.id)" size="mini">分配权限</el-button>
+                    <el-button v-permission="'role:edit'" type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
+                    <el-button v-permission="'role:delete'" type="danger"  @click="handleDelete(scope.row.id)"  size="mini">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>

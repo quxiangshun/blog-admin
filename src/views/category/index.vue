@@ -2,10 +2,10 @@
     <div class="app-container">
         <!-- 条件查询 -->
         <el-form :inline="true" :model="query" size="mini">
-            <el-form-item label="分类名称：">
+            <el-form-item v-permission="'category:search'" label="分类名称：">
                 <el-input v-model.trim="query.name" ></el-input>
             </el-form-item>
-            <el-form-item label="状态：">
+            <el-form-item v-permission="'category:search'" label="状态：">
                 <el-select v-model="query.status" clearable filterable style="width: 85px">
                     <el-option 
                         v-for="item in statusOptions" :key="item.code" 
@@ -14,9 +14,9 @@
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button icon="el-icon-search" type="primary" @click="queryData">查询</el-button>
-                <el-button icon="el-icon-refresh"  @click="reload">重置</el-button>
-                <el-button icon="el-icon-circle-plus-outline" type="primary" @click="openAdd" >新增</el-button>
+                <el-button v-permission="'category:search'" icon="el-icon-search" type="primary" @click="queryData">查询</el-button>
+                <el-button v-permission="'category:search'" icon="el-icon-refresh"  @click="reload">重置</el-button>
+                <el-button v-permission="'category:add'" icon="el-icon-circle-plus-outline" type="primary" @click="openAdd" >新增</el-button>
             </el-form-item>
         </el-form>
 
@@ -40,8 +40,8 @@
             </el-table-column>
             <el-table-column  align="center" label="操作" >
                 <template slot-scope="scope">
-                    <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
-                    <el-button type="danger"  @click="handleDelete(scope.row.id)"  size="mini">删除</el-button>
+                    <el-button v-permission="'category:edit'" type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
+                    <el-button v-permission="'category:delete'" type="danger"  @click="handleDelete(scope.row.id)"  size="mini">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>

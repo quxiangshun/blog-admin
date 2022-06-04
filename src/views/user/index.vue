@@ -3,16 +3,16 @@
 
         <!-- 条件查询 -->
         <el-form :inline="true" :model="query" size="mini">
-            <el-form-item label="用户名:">
+            <el-form-item v-permission="'user:search'" label="用户名:">
                 <el-input v-model.trim="query.username" ></el-input>
             </el-form-item>
-            <el-form-item label="手机号:">
+            <el-form-item v-permission="'user:search'" label="手机号:">
                 <el-input v-model.trim="query.mobile" ></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button icon="el-icon-search" type="primary" @click="queryData">查询</el-button>
-                <el-button icon="el-icon-refresh"  @click="reload">重置</el-button>
-                <el-button icon="el-icon-circle-plus-outline" type="primary" @click="openAdd" >新增</el-button>
+                <el-button v-permission="'user:search'" icon="el-icon-search" type="primary" @click="queryData">查询</el-button>
+                <el-button v-permission="'user:search'" icon="el-icon-refresh"  @click="reload">重置</el-button>
+                <el-button v-permission="'user:add'" icon="el-icon-circle-plus-outline" type="primary" @click="openAdd" >新增</el-button>
             </el-form-item>
         </el-form>
 
@@ -56,10 +56,10 @@
             </el-table-column>
             <el-table-column  align="center" label="操作" width="330">
                 <template slot-scope="scope" v-if="scope.row.isEnabled === 1">
-                    <el-button type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
-                    <el-button type="danger"  @click="handleDelete(scope.row.id)"  size="mini">删除</el-button>
-                    <el-button type="primary" @click="handleRole(scope.row.id)" size="mini">设置角色</el-button>
-                    <el-button type="primary"  @click="handlePwd(scope.row.id)"  size="mini">密码修改</el-button>
+                    <el-button v-permission="'user:edit'" type="success" @click="handleEdit(scope.row.id)" size="mini">编辑</el-button>
+                    <el-button v-permission="'user:delete'" type="danger"  @click="handleDelete(scope.row.id)"  size="mini">删除</el-button>
+                    <el-button v-permission="'user:role'" type="primary" @click="handleRole(scope.row.id)" size="mini">设置角色</el-button>
+                    <el-button v-permission="'user:password'" type="primary"  @click="handlePwd(scope.row.id)"  size="mini">密码修改</el-button>
                 </template>
             </el-table-column>
         </el-table>
