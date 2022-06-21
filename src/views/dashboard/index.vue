@@ -57,25 +57,25 @@ export default {
   methods: {
     async getTotal() {
       //查询总用户。 data取别名userTotal
-      const {data: userTotal} = await api.getUserTotal()
+      const userTotal = await api.getUserTotal()
       this.userTotal = userTotal
 
       // 总文章
-      const {data: articleTotal} = await api.getArticleTotal()
+      const articleTotal = await api.getArticleTotal()
       this.articleTotal = articleTotal
       
       // 总提问
-      const {data: questionTotal} = await api.getQuestionTotal()
+      const questionTotal = await api.getQuestionTotal()
       this.questionTotal = questionTotal
     },
 
     async getAricleTotal() {
       // 统计各技术频道文章数
-      const {data: categoryTotal} = await api.getCategoryTotal()
+      const categoryTotal = await api.getCategoryTotal()
       this.categoryTotal = categoryTotal
 
       // 近6个月发布文章数
-      const {data: monthArticleTotal} = await api.getMonthArticleTotal()
+      const monthArticleTotal = await api.getMonthArticleTotal()
       this.monthArticleTotal = monthArticleTotal
 
       // 先查询到数据后，再加载图表组件，将数据渲染，

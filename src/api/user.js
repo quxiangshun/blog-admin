@@ -26,7 +26,7 @@ export function logout() {
 // 条件分页查询用户列表
 export function getList(query, current = 1, size = 20) {
   return request({
-    url: `/system/user/search`,
+    url: `/system/v1/user/search`,
     method: 'post',
     data: {...query, current, size}
   })
@@ -35,7 +35,7 @@ export function getList(query, current = 1, size = 20) {
 // 新增用户
 export function add( data ) {
   return request({
-    url: `/system/user`,
+    url: `/system/v1/user`,
     method: 'post',
     data
   })
@@ -44,7 +44,7 @@ export function add( data ) {
 // 查询用户信息
 export function getById( id ) {
   return request({
-    url: `/system/user/${id}`,
+    url: `/system/v1/user/${id}`,
     method: 'get'
   })
 }
@@ -52,7 +52,7 @@ export function getById( id ) {
 // 更新
 export function update( data ) {
   return request({
-    url: `/system/user`,
+    url: `/system/v1/user`,
     method: 'put',
     data
   })
@@ -61,7 +61,7 @@ export function update( data ) {
 // 删除
 export function deleteById(id) {
   return request({
-    url: `/system/user/${id}`,
+    url: `/system/v1/user/${id}`,
     method: 'delete'
   })
 }
@@ -69,7 +69,7 @@ export function deleteById(id) {
 // 查询用户所拥有的角色id
 export function getRoleIdsByUserId( id ) {
   return request({
-    url: `/system/user/${id}/role/ids`,
+    url: `/system/v1/user/${id}/role/ids`,
     method: 'get'
   })
 }
@@ -77,7 +77,7 @@ export function getRoleIdsByUserId( id ) {
 // 保存用户拥有角色
 export function saveUserRole(id, roleIds) {
   return request({
-    url: `/system/user/${id}/role/save`,
+    url: `/system/v1/user/${id}/role/save`,
     method: 'post',
     data: roleIds
   })
@@ -86,7 +86,7 @@ export function saveUserRole(id, roleIds) {
 // 提交修改新密码
 export function updatePassword(data) {
   return request({
-    url: `/system/user/password`,
+    url: `/system/v1/user/password`,
     method: 'put',
     data
   })
@@ -95,7 +95,7 @@ export function updatePassword(data) {
 // 查询当前登录用户所拥有的菜单和按钮权限
 export function getUserMenuList(userId) {
   return request({
-    url: `/system/menu/user/${userId}`,
+    url: `/system/v1/menu/user/${userId}`,
     method: 'get'
   })
 }

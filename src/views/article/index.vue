@@ -28,11 +28,11 @@
             <el-table-column  align="center" type="index" label="序号" width="60"></el-table-column>
             <el-table-column  align="center" prop="title" label="文章标题" ></el-table-column>
             <el-table-column  align="center" prop="viewCount" label="浏览数" ></el-table-column>
-            <el-table-column  align="center" prop="thumhup" label="点赞数" ></el-table-column>
-            <el-table-column  align="center" prop="ispublic" label="是否公开" >
+            <el-table-column  align="center" prop="thumbUp" label="点赞数" ></el-table-column>
+            <el-table-column  align="center" prop="isPublic" label="是否公开" >
                 <template slot-scope="scope">
-                    <el-tag v-if="scope.row.ispublic === 0" type="danger">不公开</el-tag>
-                    <el-tag v-if="scope.row.ispublic === 1" type="warning">公开</el-tag>
+                    <el-tag v-if="scope.row.isPublic === 0" type="danger">不公开</el-tag>
+                    <el-tag v-if="scope.row.isPublic === 1" type="warning">公开</el-tag>
                 </template>
             </el-table-column>
             <el-table-column  align="center" prop="status" label="状态" >
@@ -46,7 +46,7 @@
             </el-table-column>
             <el-table-column  align="center" prop="updateDate" label="最后更新时间" min-width="90px" >
                 <template slot-scope="scope">
-                    {{ getFormat(scope.row.updateDate) }}
+                    {{ getFormat(scope.row.updateTime || scope.row.createTime) }}
                 </template>
             </el-table-column>
             <el-table-column  align="left" label="操作" width="210" >
@@ -98,7 +98,7 @@ export default {
             list: [],
             page: {
                 current: 1,
-                size: 20,
+                size: 10,
                 total: 0
             },
             query: {}, // 查询条件
@@ -113,13 +113,13 @@ export default {
     },
 
     created() {
-        // this.fetchData()
+        this.fetchData()
     },
 
     methods: {
         // 分页条件查询文章列表
         async fetchData() {
-            const { data } = 
+            const  data  = 
                 await api.getList(this.query, this.page.current, this.page.size)
             this.list = data.records
             this.page.total = data.total
@@ -190,8 +190,8 @@ export default {
                 api.deleteById(id).then(response => {
                     // 处理响应结果提示
                     this.$message({
-                        type: response.code === 20000 ? 'success': 'error',
-                        message: response.message
+                        type: 'success',
+                        message: '删除成功'
                     })
                 })
                 // 刷新列表数据

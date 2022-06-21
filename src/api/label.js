@@ -4,7 +4,7 @@ export default {
     // 分页条件查询标签列表
     getList(query, current = 1, size = 20) {
         return request({
-            url: `/article/label/search`,
+            url: `/category/v1/label/search`,
             method: 'post',
             data: {...query, current, size} // 合并为一个新对象提交给后台数据接口
         })
@@ -13,7 +13,7 @@ export default {
     // 新增标签
     add(data) {
         return request({
-            url: `/article/label`,
+            url: `/category/v1/label`,
             method: 'post',
             data
         })
@@ -22,7 +22,7 @@ export default {
     // 查询标签详情
     getById(id) {
         return request({
-            url: `/article/label/${id}`,
+            url: `/category/v1/label/${id}`,
             method: 'get'
         })
     },
@@ -30,7 +30,7 @@ export default {
     // 更新标签
     update(data) {
         return request({
-            url: `/article/label`,
+            url: `/category/v1/label`,
             method: 'put',
             data
         })
@@ -39,7 +39,7 @@ export default {
     // 通过标签id删除标签信息
     deleteById(id) {
         return request({
-            url: `/article/label/${id}`,
+            url: `/category/v1/label/${id}`,
             method: 'delete'
         })
     }

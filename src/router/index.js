@@ -75,7 +75,7 @@ export const constantRoutes = [
         meta: {
           title: '文章管理',
           icon: 'el-icon-notebook-1',
-          affix: true // 如果设置为true，它则会固定在tags-view中(默认 false) }
+          // affix: true // 如果设置为true，它则会固定在tags-view中(默认 false) }
         }
       },
       {

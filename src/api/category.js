@@ -5,7 +5,7 @@ export default {
     // 分页条件查询分类列表 
     getList(query, current = 1, size = 20) {
         return request({ // Promise
-            url: `/article/category/search`,
+            url: `/category/v1/category/search`,
             method: 'post',
             data: { // {name: '前端', status: 1, current: current, size: size}
                 ...query,
@@ -17,7 +17,7 @@ export default {
 
     add( data ) {
         return request({
-            url: `/article/category`,
+            url: `/category/v1/category`,
             method: 'post',
             data: data
         })
@@ -26,7 +26,7 @@ export default {
     // 查询类别详情
     getById( id ) {
         return request({
-            url: `/article/category/${id}`,
+            url: `/category/v1/category/${id}`,
             method: 'get'
         })
     },
@@ -34,7 +34,7 @@ export default {
     // 更新
     update(data) {
         return request({
-            url: `/article/category`,
+            url: `/category/v1/category`,
             method: 'put',
             data
         })
@@ -43,7 +43,7 @@ export default {
     // 删除
     deleteById(id) {
         return request({
-            url: `/article/category/${id}`,
+            url: `/category/v1/category/${id}`,
             method: 'delete'
         })
     },
@@ -51,7 +51,7 @@ export default {
     // 查询正常状态的分类
     getNormalList() {
         return request({
-            url: `/article/category/list`,
+            url: `/category/v1/category/list`,
             method: 'get'
         })
     },
@@ -59,7 +59,7 @@ export default {
     // 获取所有正常状态下的分类和标签
     getCategoryAndLabel() {
         return request({
-            url: `/article/category/label/list`,
+            url: `/category/v1/category/label/list`,
             method: 'get'
         })
     }

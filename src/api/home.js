@@ -5,7 +5,7 @@ export default {
     // 查询总用户
     getUserTotal() {
         return request({
-            url: `/system/user/total`,
+            url: `/system/v1/user/total`,
             method: 'get'
         })
     },
@@ -13,7 +13,7 @@ export default {
     // 查询总文章
     getArticleTotal() {
         return request({
-            url: `/article/article/total`,
+            url: `/article/v1/article/total`,
             method: 'get'
         })
     },
@@ -21,7 +21,7 @@ export default {
     // 查询总提问
     getQuestionTotal() {
         return request({
-            url: `/question/question/total`,
+            url: `/question/v1/question/total`,
             method: 'get'
         })
     },
@@ -29,7 +29,7 @@ export default {
     // 查询各分类下的文章数
     getCategoryTotal() {
         return request({
-            url: `/article/article/category/total`,
+            url: `/article/v1/article/category/total`,
             method: 'get'
         })
     },
@@ -37,7 +37,7 @@ export default {
     // 查询近6个月发布的文章数
     getMonthArticleTotal() {
         return request({
-            url: `/article/article/month/total`,
+            url: `/article/v1/article/month/total`,
             method: 'get'
         })
     }

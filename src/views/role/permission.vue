@@ -1,7 +1,11 @@
 <template>
-    <el-dialog :title="title" :visible.sync="visible" width="500px"
-    :before-close="handleClose">
-    <!-- v-loading 值为true 显示加载中 -->
+    <el-dialog
+        :title="title"
+        :visible.sync="visible"
+        width="500px"
+        :before-close="handleClose"
+    >
+        <!-- v-loading 值为true 显示加载中 -->
         <el-form ref="formData" v-loading="loading" label-width="80px">
             <!-- 
                 :data 绑定的渲染数据，数组
@@ -16,13 +20,19 @@
                 :data="menuList"
                 show-checkbox
                 node-key="id"
-                :props="{children: 'children', label: 'name'}"
+                :props="{ children: 'children', label: 'name' }"
                 accordion
-                :default-checked-keys="menuIds">
+                :default-checked-keys="menuIds"
+            >
             </el-tree>
 
             <el-form-item>
-                <el-button type="primary" @click="submitForm('formData')" size="mini">确定</el-button>
+                <el-button
+                    type="primary"
+                    @click="submitForm('formData')"
+                    size="mini"
+                    >确定</el-button
+                >
                 <el-button size="mini" @click="handleClose">取消</el-button>
             </el-form-item>
         </el-form>
@@ -30,97 +40,89 @@
 </template>
 
 <script>
+import menuApi from "@/api/menu";
+import roleApi from "@/api/role";
 
-import menuApi from '@/api/menu'
-import roleApi from '@/api/role'
-
-  export default {
-
+export default {
     props: {
         visible: {
             type: Boolean,
-            default: false
+            default: false,
         },
         title: {
             type: String,
-            default: ''
+            default: "",
         },
         remoteClose: Function,
 
-        roleId: null // 角色id
+        roleId: null, // 角色id
     },
 
     data() {
-      return {
-
-        menuList: [], // 存储所有菜单
-        loading: false, // 加载中, true 则显示加载中, false 不显示加载中
-        menuIds: [] // 默认选中的菜单ids
-      };
+        return {
+            menuList: [], // 存储所有菜单
+            loading: false, // 加载中, true 则显示加载中, false 不显示加载中
+            menuIds: [], // 默认选中的菜单ids
+        };
     },
 
     watch: {
         visible(val) {
-            if(val) {
+            if (val) {
                 // visible=true 则加载所有菜单
-                this.getMenuList()
+                this.getMenuList();
             }
-        }
+        },
     },
 
     methods: {
-
         // 获取所有菜单
         getMenuList() {
             // 加载中
-            this.loading = true
-            menuApi.getList( {} ).then(response => {
+            this.loading = true;
+            menuApi.getList({}).then((data) => {
                 // console.log('response.data', response.data)
-                this.menuList = response.data
+                this.menuList = data;
                 // 查询角色之前所拥有的菜单ids ,然后进行回显
-                this.getMenuIdsByRoleId()
-            })
+                this.getMenuIdsByRoleId();
+            });
             // 加载完成
-            this.loading = false
+            this.loading = false;
         },
 
         // 查询角色之前所拥有的菜单ids ,然后进行回显
         async getMenuIdsByRoleId() {
-            const {data} = await roleApi.getMenuIdsByRoleId(this.roleId)
+            const data = await roleApi.getMenuIdsByRoleId(this.roleId);
             // this.menuIds = data
-            data.forEach(id => {
+            data.forEach((id) => {
                 // 获取节点对象
-                const node = this.$refs.tree.getNode(id)
-                if(node.isLeaf) {
-                    this.$refs.tree.setChecked(id, true)
+                const node = this.$refs.tree.getNode(id);
+                if (node.isLeaf) {
+                    this.$refs.tree.setChecked(id, true);
                 }
-            })
+            });
         },
 
         submitForm(formName) {
             // 获取所有被选中的菜单id
-           const checkedMenuIds = this.$refs.tree.getCheckedKeys()
-           // 半选中
-           const parentIds = this.$refs.tree.getHalfCheckedKeys()
-           const menuIds = parentIds.concat(checkedMenuIds);
-           // 调用保存角色权限菜单接口
-           roleApi.saveRoleMenu(this.roleId, menuIds ).then(response => {
-               if(response.code === 20000) {
-                   this.$message({message: '分配权限成功', type: 'success'})
-                   //关闭窗口
-                   this.handleClose()
-               }else {
-                   this.$message({message: '分配权限失败', type: 'error'})
-               }
-           })
+            const checkedMenuIds = this.$refs.tree.getCheckedKeys();
+            // 半选中
+            const parentIds = this.$refs.tree.getHalfCheckedKeys();
+            const menuIds = parentIds.concat(checkedMenuIds);
+            // 调用保存角色权限菜单接口
+            roleApi.saveRoleMenu(this.roleId, menuIds).then(() => {
+                this.$message({ message: "权限分配成功", type: "success" });
+                //关闭窗口
+                this.handleClose();
+            });
         },
 
         // 关闭窗口
         handleClose() {
-            this.menuList = []
-            this.menuIds = []
-            this.remoteClose()
-        }
-    }
-  };
+            this.menuList = [];
+            this.menuIds = [];
+            this.remoteClose();
+        },
+    },
+};
 </script>

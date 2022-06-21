@@ -4,7 +4,7 @@ export default {
     // 条件分页查询接口
     getList(query, current = 1, size = 20) {
         return request({
-            url: `/article/advert/search`,
+            url: `/system/v1/advert/search`,
             method: 'post',
             data: {...query, current, size}
         })
@@ -13,7 +13,7 @@ export default {
     // 新增广告
     add(data) {
         return request({
-            url: `/article/advert`,
+            url: `/system/v1/advert`,
             method: 'post',
             data
         })
@@ -22,7 +22,7 @@ export default {
     // 查询详情
     getById(id) {
         return request({
-            url: `/article/advert/${id}`,
+            url: `/system/v1/advert/${id}`,
             method: 'get'
         })
     },
@@ -30,7 +30,7 @@ export default {
     // 更新
     update(data) {
         return request({
-            url: `/article/advert`,
+            url: `/system/v1/advert`,
             method: 'put',
             data
         })
@@ -39,7 +39,7 @@ export default {
     // 删除
     deleteById(id) {
         return request({
-            url: `/article/advert/${id}`,
+            url: `/system/v1/advert/${id}`,
             method: 'delete'
         })
     }

@@ -99,7 +99,7 @@ export default {
                 type: 'warning'
             }).then(() => {
                 // 发送审核通过请求
-               api.auditSuccess(this.id).then(response => {
+               api.auditSuccess(this.id).then(() => {
                    // 提示信息
                    this.$message({
                         type: 'success',
@@ -121,7 +121,7 @@ export default {
                 type: 'warning'
             }).then(() => {
                 // 发送审核通过请求
-               api.auditFail(this.id).then(response => {
+               api.auditFail(this.id).then(() => {
                    // 提示信息
                    this.$message({
                         type: 'success',
@@ -137,12 +137,12 @@ export default {
 
         // 查询文章详情
         async getArticleById() {
-           const {data} = await api.getById(this.id)
+           const data = await api.getById(this.id)
            this.formData = data
         },
 
         async getLabelOptions() {
-           const {data} = await categoryApi.getCategoryAndLabel()
+           const data = await categoryApi.getCategoryAndLabel()
            this.labelOptions = data
         //    console.log('this.labelOptions', this.labelOptions)
         }
